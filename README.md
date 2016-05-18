@@ -19,6 +19,7 @@ The Instinct Planner is Open Source Software distributed under the GNU GPL licen
 
 Copyright (c) 2015 Robert H. Wortham
 
-   [Instinct Planner]: <//http://www.robwortham.com/instinct-planner/>
-   [R5 Robot]: <//http://www.robwortham.com/r5-robot/>
-   [my web site]: <//http://www.robwortham.com>
+   [Instinct Planner]: <http://www.robwortham.com/instinct-planner/>
+   [R5 Robot]: <http://www.robwortham.com/r5-robot/>
+   [my web site]: <http://www.robwortham.com>
+
