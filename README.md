@@ -11,6 +11,7 @@ For full details see [Instinct Planner] page on the [my web site].
 Version
 ------
 1.0.1 - First public upload
+
 1.1.0 - Various fixes and added Names - a class to store Names associated with instinctIDs in a memory buffer
 
 
