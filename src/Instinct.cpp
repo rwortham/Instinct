@@ -274,7 +274,10 @@ unsigned char Planner::executeDrive(PlanElement * pDrive)
 	pElement = findChildAorAPorC(pDrive->sDrive.bRuntime_ChildID, &bNodeType);
 
 	if (!pElement)
+	{
+		countError(pDrive, INSTINCT_DRIVE);
 		return INSTINCT_ERROR; // only happens if plan structure is malformed
+	}
 
 	switch (bNodeType)
 	{
@@ -330,7 +333,10 @@ unsigned char Planner::executeCE(PlanElement *pCE, PlanElement *pDrive)
 	pElement = findChildAorAPorC(pCE->sCompetenceElement.sParentChild.bRuntime_ChildID, &bNodeType);
 
 	if (!pElement)
+	{
+		countError(pCE, INSTINCT_COMPETENCEELEMENT);
 		return INSTINCT_ERROR; // only happens if plan structure is malformed
+	}
 
 	switch (bNodeType)
 	{
@@ -1047,7 +1053,10 @@ unsigned char Planner::executeAPE(PlanElement *pAPE, PlanElement *pDrive)
 	pElement = findChildAorAPorC(pAPE->sActionPatternElement.sParentChild.bRuntime_ChildID, &bNodeType);
 
 	if (!pElement)
+	{
+		countError(pAPE, INSTINCT_ACTIONPATTERNELEMENT);
 		return INSTINCT_ERROR; // only happens if plan structure is malformed
+	}
 
 	switch (bNodeType)
 	{
@@ -1065,10 +1074,21 @@ unsigned char Planner::executeAPE(PlanElement *pAPE, PlanElement *pDrive)
 		break;
 	}
 
-	// update the success counter for this APE
-	if (INSTINCT_RTN(bRtn) == INSTINCT_SUCCESS)
+	// update the runtime success counter
+	switch (INSTINCT_RTN(bRtn))
 	{
+	case INSTINCT_SUCCESS:
 		countSuccess(pAPE, INSTINCT_ACTIONPATTERNELEMENT);
+		break;
+	case INSTINCT_IN_PROGRESS:
+		countInProgress(pAPE, INSTINCT_ACTIONPATTERNELEMENT);
+		break;
+	case INSTINCT_FAIL:
+		countFail(pAPE, INSTINCT_ACTIONPATTERNELEMENT);
+		break;
+	case INSTINCT_ERROR:
+		countError(pAPE, INSTINCT_ACTIONPATTERNELEMENT);
+		break;
 	}
 
 	return bRtn;

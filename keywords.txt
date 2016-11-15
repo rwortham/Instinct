@@ -72,6 +72,7 @@ Monitor	KEYWORD1
 PlanManager	KEYWORD1
 Planner	KEYWORD1
 CmdPlanner	KEYWORD1
+Names	KEYWORD1
 
 # methods
 setPlanID	KEYWORD2
@@ -103,3 +104,10 @@ displayNode	KEYWORD2
 displayNodeCounters	KEYWORD2
 displayNodeCounters	KEYWORD2
 displayReleaser	KEYWORD2
+addElementName(const instinctID bRuntime_ElementID, char *pElementName);
+getElementName(const instinctID bRuntime_ElementID);
+clearElementNames	KEYWORD2
+elementNameCount	KEYWORD2
+elementBuffer	KEYWORD2
+elementBufferSize	KEYWORD2
+maxElementNameID	KEYWORD2

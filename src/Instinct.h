@@ -302,6 +302,40 @@ public:
 	unsigned char displayReleaser(char *pStrBuff, const int nBuffLen, const ReleaserType *pReleaser);
 };
 
+
+// ** the following structures and class are separate to the Planner itself, but allow names and ID's to be stored and retrieved
+// ** this is useful for debugging or for textual monitoring of plan operation
+
+// structures to store a variable number of variable length names associated with IDs.
+// this struct holds an ID and a variable length zero terminated name
+typedef struct {
+	instinctID bRuntime_ElementID;
+	char szName[2]; // names are variable length and zero terminated
+} ElementNameEntryType;
+
+// this struct stores the total buffer size, the number of entries it contains and the storage for the entries
+typedef struct {
+	unsigned int uiBuffLen;
+	instinctID bEntryCount;
+	ElementNameEntryType sEntry[2]; // there will be uiEntryCount of these
+} ElementNameBufferType;
+
+class Names {
+public:
+	Names(const unsigned int uiBufferSize);
+	unsigned char addElementName(const instinctID bRuntime_ElementID, char *pElementName);
+	char * getElementName(const instinctID bRuntime_ElementID);
+	unsigned char clearElementNames(void);
+	instinctID elementNameCount(void);
+	unsigned char * elementBuffer(void);
+	unsigned int elementBufferSize(void);
+	instinctID maxElementNameID(void);
+
+private:
+	// pointer to the buffer containing all the names
+	ElementNameBufferType *pElementNameBuffer;
+};
+
 } // /namespace Instinct
 
 #endif // _INSTINCT_H_
