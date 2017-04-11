@@ -74,6 +74,8 @@ namespace Instinct {
 	typedef unsigned int actionID;
 #endif
 
+#define INSTINCT_MAX_INSTINCTID  ((0x01 << (sizeof(Instinct::instinctID)*8))-1)
+
 typedef struct {
 	senseID bSenseID;
 	unsigned char bComparator;
@@ -230,6 +232,11 @@ public:
 	void setGlobalMonitorFlags(const unsigned char bMonitorExecuted, const unsigned char bMonitorSuccess,
 		const unsigned char bMonitorPending, const unsigned char bMonitorFail, const unsigned char bMonitorError, const unsigned char bMonitorSense);
 	int sizeFromNodeType(const unsigned char nNodeType);
+	unsigned char setDrivePriority(const instinctID bRuntime_ElementID, const instinctID bPriority);
+	unsigned char setRuntimeDrivePriority(const instinctID bRuntime_ElementID, const instinctID bPriority);
+	instinctID getDrivePriority(const instinctID bRuntime_ElementID);
+	instinctID getRuntimeDrivePriority(const instinctID bRuntime_ElementID);
+
 
 	protected:
 	Senses * _pSenses;
@@ -325,6 +332,7 @@ public:
 	Names(const unsigned int uiBufferSize);
 	unsigned char addElementName(const instinctID bRuntime_ElementID, char *pElementName);
 	char * getElementName(const instinctID bRuntime_ElementID);
+	instinctID getElementID(const char *pName);
 	unsigned char clearElementNames(void);
 	instinctID elementNameCount(void);
 	unsigned char * elementBuffer(void);

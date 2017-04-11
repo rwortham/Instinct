@@ -379,6 +379,50 @@ void PlanManager::setGlobalMonitorFlags(const unsigned char bMonitorExecuted, co
 		(bMonitorFail ? 0x08 : 0x0) | (bMonitorError ? 0x10 : 0x0) | (bMonitorSense ? 0x20 : 0x0);
 }
 
+// set the Drive Priority for the given element ID. Return 0 if not found
+unsigned char PlanManager::setDrivePriority(const instinctID bRuntime_ElementID, const instinctID bPriority)
+{
+	PlanElement *pDrive = findElement(bRuntime_ElementID, INSTINCT_DRIVE);
+	if (!pDrive)
+		return false;
+
+	pDrive->sDrive.sDrivePriority.bPriority = bPriority;
+
+	return true;
+}
+
+// set the Drive Priority for the given element ID. Return 0 if not found
+unsigned char PlanManager::setRuntimeDrivePriority(const instinctID bRuntime_ElementID, const instinctID bPriority)
+{
+	PlanElement *pDrive = findElement(bRuntime_ElementID, INSTINCT_DRIVE);
+	if (!pDrive)
+		return false;
+
+	pDrive->sDrive.sDrivePriority.bRuntime_Priority = bPriority;
+
+	return true;
+}
+
+// get the Drive Priority for the given element ID. Return 0 if not found
+instinctID PlanManager::getDrivePriority(const instinctID bRuntime_ElementID)
+{
+	PlanElement *pDrive = findElement(bRuntime_ElementID, INSTINCT_DRIVE);
+	if (!pDrive)
+		return 0;
+
+	return pDrive->sDrive.sDrivePriority.bPriority;
+}
+
+// get the Runtime Drive Priority for the given element ID. Return 0 if not found
+instinctID PlanManager::getRuntimeDrivePriority(const instinctID bRuntime_ElementID)
+{
+	PlanElement *pDrive = findElement(bRuntime_ElementID, INSTINCT_DRIVE);
+	if (!pDrive)
+		return false;
+
+	return pDrive->sDrive.sDrivePriority.bRuntime_Priority;
+}
+
 // find an element based on the supplied ElementID and NodeType
 // return null pointer if no match
 PlanElement * PlanManager::findElement(const instinctID bElementID, const unsigned char nNodeType)

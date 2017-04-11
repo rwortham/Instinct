@@ -84,11 +84,30 @@ char * Names::getElementName(const instinctID bRuntime_ElementID)
   return NULL;
 }
 
+instinctID Names::getElementID(const char *pName)
+{
+	if (!pElementNameBuffer || !pName)
+		return NULL;
+
+	ElementNameEntryType *pEntry = pElementNameBuffer->sEntry;
+
+	for (instinctID i = 0; i < pElementNameBuffer->bEntryCount; i++)
+	{
+		if (!strcmp(pEntry->szName, pName))
+			return pEntry->bRuntime_ElementID;
+
+		pEntry = (ElementNameEntryType *)((char *)pEntry + sizeof(instinctID) + strlen(pEntry->szName) + 1);
+	}
+
+	return 0;
+}
+
 unsigned char Names::clearElementNames(void)
 {
   if (!pElementNameBuffer)
     return false;
   pElementNameBuffer->bEntryCount = 0;
+  return true;
 }
 
 instinctID Names::elementNameCount(void)
