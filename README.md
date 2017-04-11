@@ -14,12 +14,14 @@ Version
 
 1.1.0 - Various fixes and added Names - a class to store Names associated with instinctIDs in a memory buffer
 
+1.1.1 - Added ability to retrieve and modify drive priority as the plan is running. Also added ability to get a plan element ID from its element name.
+
 
 License
 ----
 The Instinct Planner is Open Source Software distributed under the GNU GPL licence.
 
-Copyright (c) 2015 Robert H. Wortham
+Copyright (c) 2015-17 Robert H. Wortham
 
    [Instinct Planner]: <http://www.robwortham.com/instinct-planner/>
    [R5 Robot]: <http://www.robwortham.com/r5-robot/>
